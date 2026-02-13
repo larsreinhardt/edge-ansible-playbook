@@ -1,0 +1,28 @@
+# --- UFW ---
+ufw_wireguard_port: 51820
+
+# --- WireGuard (VPS-side) ---
+wg_interface: wg0
+wg_listen_port: 51820
+
+# Dette er WG-IPen til VPS-en (separat fra hjemmenett)
+wg_vps_address: "192.168.13.3/24"
+
+# UDM Pro sin WG-IP i samme WG-subnett
+wg_peer_udm_ip: "192.168.13.1/32"
+
+# Hjemme-LANet ditt (bak UDM)
+home_lan_cidr: "192.168.20.0/24"
+
+# Endpoint til UDM (DDNS eller offentlig IP). Hvis UDM sitter bak CGNAT, må du gjøre VPS som "server" og UDM som client.
+udm_endpoint: "DIN_UDM_PUBLIC_IP:51820"
+
+# Nøkler (IKKE commit disse til Git)
+wg_vps_private_key: "SETT_INN_VPS_PRIVATE_KEY"
+wg_udm_public_key: "SETT_INN_UDM_PUBLIC_KEY"
+
+# --- Traefik / domene ---
+traefik_email: "deg@dittdomene.no"
+
+# Hvor Traefik skal bo på VPS
+traefik_dir: "/opt/traefik"
