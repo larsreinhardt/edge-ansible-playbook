@@ -53,6 +53,12 @@
         port: "443"
         proto: tcp
         comment: "HTTPS"
+    
+    - name: Tillat SSH midlertidig
+      ufw:
+        rule: allow
+        port: "22"
+        proto: tcp
 
     - name: Slå på UFW logging (medium)
       ufw:
