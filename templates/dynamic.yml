@@ -1,0 +1,21 @@
+http:
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+# Her legger du routers/services etter hvert, f.eks:
+#  routers:
+#    ha:
+#      rule: "Host(`ha.dittdomene.no`)"
+#      entryPoints: ["websecure"]
+#      service: ha-svc
+#      tls:
+#        certResolver: le
+#
+#  services:
+#    ha-svc:
+#      loadBalancer:
+#        servers:
+#          - url: "http://192.168.20.50:8123"
