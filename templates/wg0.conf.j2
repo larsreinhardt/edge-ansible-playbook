@@ -1,0 +1,16 @@
+# WireGuard på VPS (edge)
+[Interface]
+Address = {{ wg_vps_address }}
+ListenPort = {{ wg_listen_port }}
+PrivateKey = {{ wg_vps_private_key }}
+
+# Peer: UDM Pro hjemme
+[Peer]
+PublicKey = {{ wg_udm_public_key }}
+Endpoint = {{ udm_endpoint }}
+
+# Dette er nøkkelen: VPS ruter både WG-peer og hjemmenett via UDM
+AllowedIPs = {{ wg_peer_udm_ip }}, {{ home_lan_cidr }}
+
+# Holder NAT/idle-state frisk gjennom diverse rutere/brannmurer
+PersistentKeepalive = 25
