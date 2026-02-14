@@ -93,6 +93,13 @@
         state: started
 
     # -------------------------
+    # SSH-nøkler
+    # -------------------------
+    - name: last ned SSH-Nøkler
+      shell: |
+        ssh-import-id-gh larsreinhardt #bytt brukernavn hvis nødvendig
+
+    # -------------------------
     # Docker (offisiell repo)
     # -------------------------
     - name: Legg til Docker GPG key
