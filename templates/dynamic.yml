@@ -9,7 +9,9 @@ http:
         sourceRange:
           - "192.168.13.0/24"
           - "192.168.20.0/24"
-
+# ------------
+# RUTERE
+# ------------ 
   routers:
     bentopdf:
       rule: "Host(`pdf.sognensnekkerhaugen.net`)"
@@ -70,8 +72,19 @@ http:
        - wg-only
       tls:
         certResolver: le
+    immich:
+      rule: "Host(`immich.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: immich-service
+#     middlewares:
+#      - wg-only
+      tls:
+        certResolver: le
 
-
+# ------------
+# TJENESTER
+# ------------       
   services:
     pdf-service:
       loadBalancer:
@@ -97,7 +110,10 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.5.79:18083"
-
+    immich-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:2283"
 # Her legger du routers/services etter hvert, f.eks:
 #  routers:
 #    ha:
