@@ -4,6 +4,99 @@ http:
       redirectScheme:
         scheme: https
         permanent: true
+    wg-only:
+      ipAllowList:
+        sourceRange:
+          - "192.168.13.0/24"
+          - "192.168.20.0/24"
+
+  routers:
+    bentopdf:
+      rule: "Host(`pdf.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: pdf-service
+      tls:
+        certResolver: le
+    jellyfin:
+      rule: "Host(`jellyfin.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: jellyfin-service
+      tls:
+        certResolver: le
+    traefik-dashboard:
+      rule: "Host(`traefik.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: api@internal
+      middlewares:
+       - wg-only
+      tls:
+        certResolver: le
+    answer:
+      rule: "Host(`answer.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: answer-service
+      middlewares:
+       - wg-only
+      tls:
+        certResolver: le
+    babybuddy:
+      rule: "Host(`babybuddy.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: babybuddy-service
+      middlewares:
+       - wg-only
+      tls:
+        certResolver: le
+    dockge:
+      rule: "Host(`dockge.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: dockge-service
+      middlewares:
+       - wg-only
+      tls:
+        certResolver: le
+    emqx:
+      rule: "Host(`emqx.sognensnekkerhaugen.net`)"
+      entryPoints:
+        - websecure
+      service: emqx-service
+      middlewares:
+       - wg-only
+      tls:
+        certResolver: le
+
+
+  services:
+    pdf-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:3000"
+    jellyfin-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:8096"
+    answer-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:9080"
+    babybuddy-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:8000"
+    dockge-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.6.6:5001"
+    emqx-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.5.79:18083"
 
 # Her legger du routers/services etter hvert, f.eks:
 #  routers:
